@@ -12,3 +12,14 @@ echo
 echo "Git username configured as: $username"
 echo "Git email configured as: $email"
 echo "Git username and email configured globally."
+
+# Prompt for asking and setting Git credential
+read -p "Do you want to enable Git credential storage [y/n]? " answer
+if [ "$answer" == "y" ]; then
+    git config --global credential.helper store
+    echo "Git credential storage enabled."
+elif [ "$answer" == "n" ]; then
+    echo "Git credential storage not enabled. No changes made."
+else
+    echo "Invalid input. Please enter 'y' or 'n'. No changes made."
+fi
