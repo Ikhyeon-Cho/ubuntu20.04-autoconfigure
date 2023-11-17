@@ -3,6 +3,7 @@
 # Install zsh
 echo 'Installing Zsh (Including Oh-my-zsh and plugins)....'
 echo
+
 sudo apt install -y zsh
 
 # Install Oh My Zsh
@@ -12,27 +13,14 @@ RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+# Activate Zsh plugins
+echo >> ~/.zshrc
+echo 'plugins=(zsh-autosuggestions zsh-syntax-highlighting)' >> ~/.zshrc
+echo >> ~/.zshrc
+echo 'source $ZSH/oh-my-zsh.sh' >> ~/.zshrc
+
 # Install Powerline fonts
 sudo apt install -y fonts-powerline
 
-# Set Config files
-echo 'Please go to $HOME/.zshrc and configure file!'
-echo
-echo 'ZSH_THEME: agnoster'
-echo
-echo 'plugins: zsh-autosuggestions'
-echo '         zsh-syntax-highlighting'
-echo
-
-source_file="agnoster.zsh-theme"
-destination_dir="$HOME/.oh-my-zsh/themes"
-
-if [ -d "$destination_dir" ]; then
-    cp "$source_file" "$destination_dir/"
-    echo "Config file copied to $destination_dir"
-else
-    echo -e '\e[31m[Error] No "$destination_dir" exists! Failed to copy agnoster theme config.'
-fi
-
-# Setting zsh as a default shell and Restart your shell
-chsh -s $(which zsh) "$USER" && exec zsh
+# Setting zsh as a default shell
+chsh -s $(which zsh) "$USER"
