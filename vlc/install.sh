@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install VLC
-echo 'Installing VLC Media Player (via Snap)....'
+echo 'Installing VLC Media Player....'
 echo
-# Install VLC using Snap
-sudo snap install vlc
+
+sudo apt install vlc
