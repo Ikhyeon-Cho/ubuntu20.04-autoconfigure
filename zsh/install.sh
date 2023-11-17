@@ -31,5 +31,8 @@ if [ -d "$destination_dir" ]; then
     cp "$source_file" "$destination_dir/"
     echo "Config file copied to $destination_dir"
 else
-    echo 'No $destination_dir exists! Failed to copy agnoster theme config.'
+    echo -e '\e[31m[Error] No "$destination_dir" exists! Failed to copy agnoster theme config.'
 fi
+
+# Setting zsh as a default shell and Restart your shell
+chsh -s $(which zsh) "$USER" && exec zsh
