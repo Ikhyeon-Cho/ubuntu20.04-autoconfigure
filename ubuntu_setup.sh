@@ -4,7 +4,10 @@
 sudo apt update
 
 # Install basic utilities
-sudo apt install -y curl software-properties-common apt-transport-https wget git
+sudo apt install -y curl software-properties-common apt-transport-https wget git tree
+
+# Install net-tools and VNC server, XRDP: For Remote Access
+sudo apt install -y net-tools vino xrdp
 
 # Install zsh
 sudo apt install -y zsh
@@ -21,9 +24,6 @@ sudo apt install -y fonts-powerline
 
 # Install Terminator
 sudo apt install -y terminator
-
-# Install net-tools and VNC server
-sudo apt install -y net-tools vino
 
 # Install Visual Studio Code using Snap
 sudo snap install code --classic
