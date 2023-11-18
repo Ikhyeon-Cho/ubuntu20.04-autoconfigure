@@ -18,6 +18,8 @@ echo >> ~/.zshrc
 echo 'plugins=(zsh-autosuggestions zsh-syntax-highlighting)' >> ~/.zshrc
 echo >> ~/.zshrc
 echo 'source $ZSH/oh-my-zsh.sh' >> ~/.zshrc
+echo >> ~/.zshrc
+echo 'alias sz="source ~/.zshrc"' >> ~/.zshrc
 
 # Install Powerline fonts
 sudo apt install -y fonts-powerline
