@@ -40,11 +40,17 @@ print_ros_package_path() {
 }
 
 
-# Alias for ROS
+## Alias for ROS
+# ROS Packages in Workspace
 alias rpl='print_current_workspace_packages'
 alias rpp='print_ros_package_path'
+
+# ROS Workspace
+alias rw='cd ~/ros && cd'
+alias rwl='cd ~/ros && ls -al'
 alias uw='source devel/setup.zsh'
 
+# ROS Build
 alias cb='catkin build -DCMAKE_BUILE_TYPE=release'
 alias cbdbg='catkin build -DCMAKE_BUILE_TYPE=debug'
 alias cm='catkin_make -DCMAKE_BUILE_TYPE=release'
