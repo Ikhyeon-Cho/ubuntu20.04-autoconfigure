@@ -4,4 +4,4 @@
 echo 'Installing VLC Media Player....'
 echo
 
-sudo apt install vlc
+sudo apt install vlc -y
