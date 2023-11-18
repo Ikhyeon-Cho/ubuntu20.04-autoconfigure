@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Install SCM Breeze
-echo 'Installing SCM Breeze....'
-echo
-
-# Install SCM Breeze
-git clone https://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze && ~/.scm_breeze/install.sh
-
  # Prompt for and set Git username
 read -p "Enter your git username: " username
 git config --global user.name "$username"
@@ -18,7 +11,9 @@ git config --global user.email "$email"
 echo
 echo "Git username configured as: $username"
 echo "Git email configured as: $email"
+echo
 echo "Git username and email configured globally."
+echo
 
 # Prompt for asking and setting Git credential
 read -p "Do you want to enable Git credential storage [y/n]? " answer
