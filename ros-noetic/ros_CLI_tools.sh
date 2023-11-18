@@ -47,7 +47,7 @@ alias rpp='print_ros_package_path'
 
 # ROS Workspace
 alias rw='cd ~/ros && cd'
-alias rwl='cd ~/ros && ls -al'
+alias rwl='cd ~/ros && ls -l'
 alias uw='source devel/setup.zsh'
 
 # ROS Build
