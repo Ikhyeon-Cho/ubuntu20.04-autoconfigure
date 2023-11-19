@@ -9,8 +9,8 @@ read -p "Enter your git email: " email
 git config --global user.email "$email"
 
 echo
-echo "Git username configured as: $username"
-echo "Git email configured as: $email"
+echo "[Username (Global)] Git username configured as: $username"
+echo "[Email (Global)] Git email configured as: $email"
 echo
 echo "Git username and email configured globally."
 echo
@@ -19,9 +19,14 @@ echo
 read -p "Do you want to enable Git credential storage [y/n]? " answer
 if [ "$answer" == "y" ]; then
     git config --global credential.helper store
-    echo "Git credential storage enabled."
+    echo "[Credential Storage] Git credential storage enabled."
 elif [ "$answer" == "n" ]; then
-    echo "Git credential storage not enabled. No changes made."
+    echo "[Credential Storage] Git credential storage not enabled. No changes made."
 else
-    echo "Invalid input. Please enter 'y' or 'n'. No changes made."
+    echo "[Credential Storage] Invalid input. Please enter 'y' or 'n'. No changes made."
 fi
+
+# Set Git commit editor as VS Code
+git config --global core.editor "code --wait"
+echo
+echo "[Editor (Global)] Git editor configured as VS Code"
