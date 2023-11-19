@@ -14,12 +14,12 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Activate Zsh plugins
+### Use sed to replace the content on line 74 of ~/.zshrc
+sed -i '74s/.*/'plugins=(zsh-autosuggestions zsh-syntax-highlighting)'/' ~/.zshrc
+
+### Set alias refreshing shell
 echo >> ~/.zshrc
-echo 'plugins=(zsh-autosuggestions zsh-syntax-highlighting)' >> ~/.zshrc
-echo >> ~/.zshrc
-echo 'source $ZSH/oh-my-zsh.sh' >> ~/.zshrc
-echo >> ~/.zshrc
-echo 'alias sz="source ~/.zshrc"' >> ~/.zshrc
+echo 'alias sz="exec zsh"' >> ~/.zshrc
 
 # Install Powerline fonts
 sudo apt install -y fonts-powerline
