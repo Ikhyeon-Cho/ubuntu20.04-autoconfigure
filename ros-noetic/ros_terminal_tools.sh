@@ -49,9 +49,11 @@ alias rpp='print_ros_package_path'
 alias rw='cd ~/ros && cd'
 alias rwl='cd ~/ros && ls -l'
 alias uw='source devel/setup.zsh'
+alias cl='catkin list'
 
 # ROS Build
 alias cb='catkin build -DCMAKE_BUILE_TYPE=release'
 alias cbdbg='catkin build -DCMAKE_BUILE_TYPE=debug'
 alias cm='catkin_make -DCMAKE_BUILE_TYPE=release'
 alias cmdbg='catkin_make -DCMAKE_BUILE_TYPE=debug'
+alias ct='catkin test'
