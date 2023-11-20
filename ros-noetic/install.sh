@@ -15,4 +15,4 @@ sudo rosdep init
 rosdep update
 
 # Install some additional ROS packages
-sudo apt install -y python3-catkin-tools ros-noetic-jsk-visualization ros-noetic-grid-map ros-noetic-tf2-sensor-msgs ros-noetic-move-base-msgs ros-noetic-ddynamic-reconfigure
+sudo apt install -y python3-catkin-tools ros-noetic-jsk-visualization ros-noetic-grid-map ros-noetic-tf2-sensor-msgs ros-noetic-move-base-msgs ros-noetic-ddynamic-reconfigure libpcap-dev
