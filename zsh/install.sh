@@ -15,7 +15,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 # Activate Zsh plugins
 ### Use sed to replace the content on line 74 of ~/.zshrc
-sed -i '74s/.*/'plugins=(zsh-autosuggestions zsh-syntax-highlighting)'/' ~/.zshrc
+sed -i '74s/.*/plugins=(zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
 ### Set alias refreshing shell
 echo >> ~/.zshrc
