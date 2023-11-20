@@ -2,7 +2,7 @@
 
 # Copy ROS CLI tools to ~/.ros_tools.sh
 src_dir="ros-noetic"
-src_file="ros_CLI_tools.sh"
+src_file="ros_terminal_tools.sh"
 
 # Destination directory
 dest_dir="$HOME"
