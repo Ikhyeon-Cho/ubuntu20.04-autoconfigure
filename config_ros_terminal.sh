@@ -14,6 +14,7 @@ if [ -f "$src_dir/$src_file" ]; then
   cp "$src_dir/$src_file" "$dest_dir/$dest_file"
   # echo "File '$src_file' copied to '$dest_file' in your home directory."
   # write to ~/.zshrc
+  echo >> ~/.zshrc
   echo 'source ~/.ros_tools.sh' >> ~/.zshrc
 else
   echo "Error: Source file '$src_dir/$src_file' does not exist."
