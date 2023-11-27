@@ -4,7 +4,7 @@
 sudo apt install -y curl software-properties-common apt-transport-https wget git tree
 
 # Install net-tools and VNC server, XRDP: For Remote Access
-sudo apt install -y net-tools vino xrdp
+sudo apt install -y net-tools vino xrdp openssh-server
 
 # Get the current directory where ubuntu_setup.sh is located
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
