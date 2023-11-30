@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install basic utilities
-sudo apt install -y curl software-properties-common apt-transport-https wget git tree
+sudo apt install -y curl software-properties-common apt-transport-https wget git tree clang-format
 
 # Install net-tools and VNC server, XRDP: For Remote Access
 sudo apt install -y net-tools vino xrdp openssh-server
