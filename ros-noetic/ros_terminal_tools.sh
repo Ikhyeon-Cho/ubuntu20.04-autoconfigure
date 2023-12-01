@@ -39,6 +39,13 @@ print_ros_package_path() {
     echo "$ROS_PACKAGE_PATH" | tr ':' '\n'
 }
 
+rw() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: rw <ros_workspace_name_in_~/ros/>"
+    else
+        cd ~/ros/"$1" && source devel/setup.zsh
+    fi
+}
 
 ## Alias for ROS
 # ROS Packages in Workspace
@@ -46,7 +53,6 @@ alias rpl='print_current_workspace_packages'
 alias rpp='print_ros_package_path'
 
 # ROS Workspace
-alias rw='cd ~/ros && cd'
 alias rwl='cd ~/ros && ls -l'
 alias uw='source devel/setup.zsh'
 alias cl='catkin list'
