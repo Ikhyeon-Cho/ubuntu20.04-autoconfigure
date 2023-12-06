@@ -43,7 +43,7 @@ rw() {
     if [ $# -eq 0 ]; then
         echo "Usage: rw <ros_workspace_name_in_~/ros/>"
     else
-        cd ~/ros/"$1" && source devel/setup.zsh
+        cd ~/ros/"$1" && source devel/setup.zsh && cd src
     fi
 }
 
