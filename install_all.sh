@@ -6,7 +6,8 @@ sudo apt install -y \
     software-properties-common \
     apt-transport-https \
     wget \
-    simplescreenrecorder
+    simplescreenrecorder \
+    gpustat
 
 # Install Development tools
 sudo apt install -y \
