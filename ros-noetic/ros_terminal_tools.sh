@@ -63,3 +63,6 @@ alias cbdbg='catkin build -DCMAKE_BUILE_TYPE=debug'
 alias cm='catkin_make -DCMAKE_BUILE_TYPE=release'
 alias cmdbg='catkin_make -DCMAKE_BUILE_TYPE=debug'
 alias ct='catkin test'
+
+alias rbp='rosbag play --clock'
+alias rbi='rosbag info'
