@@ -42,8 +42,8 @@ There are two types of installation.
 
 **1. Using install_all.sh** In order to install the softwares above at once, use the following command:
   ```
-  cd ./ubuntu20.04-autoconfigure
-  ./install_all.sh   # Running this script will start installation
+  cd ubuntu20.04-autoconfigure
+  sudo ./install_all.sh   # Running this script will start installation
   ```
   Note that this command will install many softwares at once. 
   Please ensure you have at least 10GB of free space on your PC. 
@@ -51,7 +51,7 @@ There are two types of installation.
 
 **3. Using install.sh** In order to install the basic utilities with the specific softwares listed above, use the following command:
   ```
-  cd ./ubuntu20.04-autoconfigure
+  cd ubuntu20.04-autoconfigure
   # Running this script will start installation
   ./install.sh foldername1 foldername2 foldername3 ...   # put the specific foldername arguments such as terminator, zsh
   ```
