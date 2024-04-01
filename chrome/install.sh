@@ -17,4 +17,4 @@ fi
 
 # Install Google Chrome
 install_package google-chrome-stable
-echo
+echo -e "\033[1;32mGoogle Chrome has been installed.\033[0m"

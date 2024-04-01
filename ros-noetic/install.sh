@@ -59,3 +59,5 @@ install_package ros-noetic-grid-map-rviz-plugin
 install_package ros-noetic-nmea-msgs
 install_package ros-noetic-mavros-msgs
 install_package libpcap-dev
+
+echo -e "\033[1;32mROS Noetic has been installed.\033[0m"

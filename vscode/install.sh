@@ -29,5 +29,5 @@ echo
 update_package_list
 
 # Install Visual Studio Code
-echo -e "\033[32mInstalling Visual Studio Code...\033[0m"
 install_package code
+echo -e "\033[1;32mVisual Studio Code has been installed.\033[0m"

@@ -95,3 +95,5 @@ exec_string="$SCM_BREEZE_INIT_STRING\n[ -s \"$SCM_BREEZE_INSTALL_DIR/scm_breeze.
 sed -i "/$SCM_BREEZE_INIT_STRING/d" "$SHELL_CONFIG_FILE"
 # Append the new, silenced exec_string to the shell config file
 echo -e "$exec_string" >> "$SHELL_CONFIG_FILE"
+
+echo -e "\033[1;32mTerminal setup has been done.\033[0m"

@@ -27,4 +27,4 @@ echo -e "ResultAny=no\nResultInactive=no\nResultActive=yes" | sudo tee -a $COLOR
 echo "  Restarting xrdp service..."
 sudo systemctl restart xrdp
 echo '  Done.'
-echo
+echo -e "\033[1;32mRemote setup packages have been installed.\033[0m"

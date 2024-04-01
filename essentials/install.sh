@@ -13,4 +13,4 @@ install_package wget
 install_package gpg
 install_package git
 install_package build-essential
-echo
+echo -e "\033[1;32mEssential packages have been installed.\033[0m"
