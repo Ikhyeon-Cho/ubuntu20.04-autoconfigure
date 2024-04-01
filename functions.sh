@@ -2,7 +2,7 @@
 
 # Function to check if a package is installed
 is_installed() {
-    dpkg -l "$1" &> /dev/null
+    dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -q "install ok installed"
 }
 
 # Function to install a package if not already installed
