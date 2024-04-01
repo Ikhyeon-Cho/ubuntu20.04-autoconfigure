@@ -2,11 +2,6 @@
 
 # Install basic utilities
 sudo apt install -y \
-    curl \
-    software-properties-common \
-    apt-transport-https \
-    wget \
-    simplescreenrecorder \
     gpustat
 
 # Install Development tools
