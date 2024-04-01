@@ -20,9 +20,9 @@ install_package ros-noetic-desktop-full
 
 # Append ROS environment setup to the shell configuration file, if not already present
 SHELL_CONFIG_FILE="$HOME/.bashrc" # Default to .bashrc
-if [ -n "$ZSH_VERSION" ]; then
-   SHELL_CONFIG_FILE="$HOME/.zshrc"
-elif [ -n "$BASH_VERSION" ]; then
+if which zsh &> /dev/null; then
+    SHELL_CONFIG_FILE="$HOME/.zshrc"
+elif which bash &> /dev/null; then
    SHELL_CONFIG_FILE="$HOME/.bashrc"
 else
    echo "Unknown shell. Please add 'source /opt/ros/noetic/setup.sh' manually to your shell's config file. Quitting."

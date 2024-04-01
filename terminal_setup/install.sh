@@ -7,7 +7,6 @@ update_package_list
 echo -e "\033[1;32mInstalling terminal setup...\033[0m"
 
 # Install zsh and set as default shell
-echo -e "\033[32mInstalling zsh...\033[0m"
 install_package zsh
 
 # Check if zsh is already the default shell
@@ -19,6 +18,7 @@ else
 fi
 
 # Install Oh My Zsh
+echo
 echo -e "\033[32mInstalling Oh My Zsh...\033[0m"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
@@ -28,6 +28,7 @@ else
 fi
 
 # Install Oh My Zsh plugins
+echo
 echo -e "\033[32mInstalling Oh My Zsh plugins...\033[0m"
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -42,9 +43,11 @@ else
 fi
 
 # Activate Zsh plugins
+echo
 echo "Activating oh-my-zsh plugins..."
 sed -i '74s/.*/plugins=(zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
+echo
 echo -e "\033[32mInstalling additional packages...\033[0m"
 install_package fonts-powerline
 install_package tree
@@ -74,9 +77,9 @@ SCM_BREEZE_REPO="https://github.com/scmbreeze/scm_breeze.git"
 SCM_BREEZE_INIT_STRING="# SCM Breeze setup"
 
 # Determine which shell configuration file to use
-if [ -n "$ZSH_VERSION" ]; then
+if which zsh &> /dev/null; then
     SHELL_CONFIG_FILE="$HOME/.zshrc"
-elif [ -n "$BASH_VERSION" ]; then
+elif which bash &> /dev/null; then
     SHELL_CONFIG_FILE="$HOME/.bashrc"
 else
     echo "  Unsupported shell. Only Bash and Zsh are supported. Quitting."

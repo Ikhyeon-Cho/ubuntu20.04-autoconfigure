@@ -12,7 +12,7 @@ install_package() {
     if is_installed "$package"; then
         echo -e "  \033[33m$package is already installed.\033[0m"
     else
-        sudo apt install -y -qq "$package"
+        sudo apt install -y -qq "$package" && echo
     fi
 }
 
