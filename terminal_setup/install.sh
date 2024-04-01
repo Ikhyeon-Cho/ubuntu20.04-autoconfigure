@@ -57,15 +57,4 @@ install_package clang-format
 echo -e "\033[32mInstalling terminator...\033[0m"
 install_package terminator
 
-# Copy Config files
-source_file="config"
-destination_dir="$HOME/.config/terminator"
-
-if [ ! -d "$destination_dir" ]; then
-    mkdir -p "$destination_dir"
-fi
-
-cp "$source_file" "$destination_dir/"
-echo "  config file copied to $destination_dir"
-
 echo -e "\033[1;32mTerminal setup has been done.\033[0m"

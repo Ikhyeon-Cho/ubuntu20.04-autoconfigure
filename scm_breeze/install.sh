@@ -27,7 +27,7 @@ fi
 # Prepare the silenced exec_string
 exec_string="$SCM_BREEZE_INIT_STRING\n[ -s \"$SCM_BREEZE_INSTALL_DIR/scm_breeze.sh\" ] && source \"$SCM_BREEZE_INSTALL_DIR/scm_breeze.sh\" > /dev/null 2>&1"
 # Remove the existing SCM Breeze setup line, if any
-sed -i "/$SCM_BREEZE_INIT_STRING/d" "$SHELL_CONFIG_FILE"
+sed -i '$d; $d' ~/.zshrc
 # Append the new, silenced exec_string to the shell config file
 echo -e "$exec_string" >> "$SHELL_CONFIG_FILE"
 
