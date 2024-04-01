@@ -9,13 +9,14 @@ ROS_SOURCE_LIST="/etc/apt/sources.list.d/ros-latest.list"
 if [ ! -f "$ROS_SOURCE_LIST" ]; then
     sudo sh -c "echo 'deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main' > $ROS_SOURCE_LIST"
     # Import the repository key silently
+    install_package curl
     curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-    update_package_list
 else
     echo -e "  \033[33mROS repository already exists.\033[0m"
 fi
 
 # Install ROS Noetic
+update_package_list
 install_package ros-noetic-desktop-full
 
 # Append ROS environment setup to the shell configuration file, if not already present
