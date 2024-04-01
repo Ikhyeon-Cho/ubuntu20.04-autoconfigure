@@ -7,12 +7,12 @@ is_installed() {
 
 # Function to install a package if not already installed
 install_package() {
+    echo -e "\033[32mInstalling $1...\033[0m"
     local package="$1"
     if is_installed "$package"; then
         echo -e "  \033[33m$package is already installed.\033[0m"
     else
         sudo apt install -y -qq "$package"
-        echo -e "  Installing $package...\033[0m"
     fi
 }
 

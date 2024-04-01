@@ -7,7 +7,7 @@ update_package_list
 echo -e "\033[1;32mInstalling terminal setup...\033[0m"
 
 # Install zsh and set as default shell
-echo "Installing zsh..."
+echo -e "\033[32mInstalling zsh...\033[0m"
 install_package zsh
 
 # Check if zsh is already the default shell
@@ -19,7 +19,7 @@ else
 fi
 
 # Install Oh My Zsh
-echo "Installing oh-my-zsh..."
+echo -e "\033[32mInstalling Oh My Zsh...\033[0m"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
@@ -28,7 +28,7 @@ else
 fi
 
 # Install Oh My Zsh plugins
-echo "Installing oh-my-zsh plugins..."
+echo -e "\033[32mInstalling Oh My Zsh plugins...\033[0m"
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 else
@@ -45,13 +45,13 @@ fi
 echo "Activating oh-my-zsh plugins..."
 sed -i '74s/.*/plugins=(zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
-echo "Installing additional packages..."
+echo -e "\033[32mInstalling additional packages...\033[0m"
 install_package fonts-powerline
 install_package tree
 install_package clang-format
 
 # Install terminator
-echo "Installing terminator..."
+echo -e "\033[32mInstalling terminator...\033[0m"
 install_package terminator
 
 # Copy Config files
@@ -66,7 +66,7 @@ cp "$source_file" "$destination_dir/"
 echo "  config file copied to $destination_dir"
 
 # Install scm breeze
-echo 'Installing SCM Breeze....'
+echo -e "\033[32mInstalling SCM Breeze...\033[0m"
 
 # Define variables
 SCM_BREEZE_INSTALL_DIR="$HOME/.scm_breeze"
