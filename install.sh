@@ -1,31 +1,21 @@
 #!/bin/bash
 
-# Check if at least one folder argument is provided
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 foldername1 foldername2 foldername3 ..."
-    echo "For example, if you want to install google-chrome and vscode, run: ./install.sh chrome vscode"
-    exit 1
-fi
-
-# Install basic utilities
-sudo apt install -y curl software-properties-common apt-transport-https wget git tree
-
-# Install net-tools and VNC server, XRDP: For Remote Access
-sudo apt install -y net-tools vino xrdp
-
 # Get the current directory where ubuntu_setup.sh is located
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+project_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Iterate over specified folders and execute install.sh in each
-for folder in "$@"; do
-    folder_path="$script_dir/$folder"
-    
-    # Check if the specified folder exists and contains an install.sh script
-    if [ -d "$folder_path" ] && [ -e "$folder_path/install.sh" ]; then
-        echo "Executing install.sh in $folder_path"
-        (cd "$folder_path" && ./install.sh)
-    else
-        echo -e "\e[31m[Error] Folder '$folder' does not exist or does not contain install.sh"
-    fi
-done
+# Execute essentials/install.sh first
+cd $project_dir/essentials && ./install.sh && echo
 
+cd $project_dir/chrome && ./install.sh && echo
+
+cd $project_dir/vscode && ./install.sh && echo
+
+cd $project_dir/media_tools && ./install.sh && echo
+
+cd $project_dir/remote_setup && ./install.sh && echo
+
+cd $project_dir/terminal_setup && ./install.sh && echo
+
+cd $project_dir/ros-noetic && ./install.sh && echo
+
+cd $project_dir/scm_breeze && ./install.sh && echo
