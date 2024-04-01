@@ -20,7 +20,7 @@ fi
 
 # Install SCM Breeze
 if [ ! -d "$SCM_BREEZE_INSTALL_DIR" ]; then
-    git clone "$SCM_BREEZE_REPO" "$SCM_BREEZE_INSTALL_DIR" && ./"$SCM_BREEZE_INSTALL_DIR/install.sh"
+    git clone "$SCM_BREEZE_REPO" "$SCM_BREEZE_INSTALL_DIR" && bash "$SCM_BREEZE_INSTALL_DIR/install.sh"
 else
     echo -e "  \033[33mSCM Breeze already installed.\033[0m"
 fi
