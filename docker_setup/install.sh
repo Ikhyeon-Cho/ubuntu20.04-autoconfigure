@@ -59,7 +59,7 @@ if dpkg -l | grep -qw "$DRIVER"; then
   
   # Test the NVIDIA Container Toolkit installation
   echo -e "\033[1;32mTesting NVIDIA Container Toolkit installation...\033[0m"
-  docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+  docker run --rm --gpus all nvidia/cuda:11.0.3-base /bin/bash -c 'echo CUDA: $CUDA_VERSION'
 
 else
   echo -e "  \033[31m$DRIVER is not installed. Quit the NVIDIA docker container process.\033[0m"
