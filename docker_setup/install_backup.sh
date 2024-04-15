@@ -2,6 +2,8 @@
 
 source ../functions.sh
 
+echo -e "\033[1;32mInstalling Docker...\033[0m\n"
+
 # Function to check if Docker is installed
 is_docker_installed() {
     docker --version &> /dev/null
@@ -16,34 +18,17 @@ is_docker_installed() {
 if ! is_docker_installed; then
     echo -e "\033[1;32mInstalling Docker...\033[0m\n"
 
-    # Add Docker's official GPG key:
-    update_package_list
-    install_package ca-certificates curl
-    sudo install -m 0755 -d /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-    sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-    # Add the repository to Apt sources:
-    echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    update_package_list
-
     # Install Docker
-    install_package docker-ce \
-    docker-ce-cli \
-    containerd.io \
-    docker-buildx-plugin \
-    docker-compose-plugin
+    install_package curl
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
 
-    # Post installation steps
+    # Add the current user to the docker group
     sudo groupadd docker 2> /dev/null  # Suppress the error if the group already exists
     sudo usermod -aG docker $USER
-    newgrp docker
 
-    # Verify the installation without sudo
-    docker run hello-world
+    echo -e "\033[1;32mDocker has been installed.\033[0m"
+    echo -e "  \033[33mIf docker without [sudo] does not work, please reboot your system.\033[0m\n"
 else
     echo -e "\033[1;32mDocker already exists. Skipping Docker installation.\033[0m"
 fi
@@ -74,7 +59,6 @@ if dpkg -l | grep -qw "$DRIVER"; then
   
   # Test the NVIDIA Container Toolkit installation
   echo -e "\033[1;32mTesting NVIDIA Container Toolkit installation...\033[0m"
-  echo -e "  \033[32mCheck whether the CUDA version 11.0.3 is successfully printed!!...\033[0m"
   docker run --rm --gpus all nvidia/cuda:11.0.3-base /bin/bash -c 'echo CUDA: $CUDA_VERSION'
 
 else
