@@ -54,7 +54,6 @@ install_package tree
 install_package clang-format
 
 # Install terminator
-echo -e "\033[32mInstalling terminator...\033[0m"
 install_package terminator
 
 echo -e "\033[1;32mTerminal setup has been done.\033[0m"

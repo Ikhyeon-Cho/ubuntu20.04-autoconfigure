@@ -20,7 +20,7 @@ else
   echo "Error: Source file '$src_file' does not exist."
 fi
 
-local ROS_DIR="$HOME/ros"
+ROS_DIR="$HOME/ros"
 if [ ! -d "$ROS_DIR" ]; then
   mkdir -p "$ROS_DIR"
 fi

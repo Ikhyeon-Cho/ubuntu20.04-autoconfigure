@@ -61,4 +61,22 @@ install_package ros-noetic-nmea-msgs
 install_package ros-noetic-mavros-msgs
 install_package libpcap-dev
 
+# Velodyne ROS driver
+install_package ros-noetic-velodyne-pointcloud
+
+# Realsense SDK 2.0
+sudo mkdir -p /etc/apt/keyrings
+curl -sSf https://librealsense.intel.com/Debian/librealsense.pgp | sudo tee /etc/apt/keyrings/librealsense.pgp > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/librealsense.pgp] https://librealsense.intel.com/Debian/apt-repo `lsb_release -cs` main" | \
+sudo tee /etc/apt/sources.list.d/librealsense.list
+sudo apt-get update
+
+install_package install librealsense2-dkms
+install_package librealsense2-utils
+
+# Realsense ROS driver
+install_package ros-noetic-realsense2-camera
+install_package ros-noetic-realsense2-description
+
+
 echo -e "\033[1;32mROS Noetic has been installed.\033[0m"

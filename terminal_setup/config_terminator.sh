@@ -14,3 +14,4 @@ fi
 cp "$source_file" "$destination_dir/"
 
 echo -e "\033[32mTerminator config file copied to $destination_dir\033[0m"
+echo -e "\033[32mLaunch new terminal!\033[0m"
