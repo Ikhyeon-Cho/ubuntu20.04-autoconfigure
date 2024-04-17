@@ -71,7 +71,7 @@ echo "deb [signed-by=/etc/apt/keyrings/librealsense.pgp] https://librealsense.in
 sudo tee /etc/apt/sources.list.d/librealsense.list
 sudo apt-get update
 
-install_package install librealsense2-dkms
+install_package librealsense2-dkms
 install_package librealsense2-utils
 
 # Realsense ROS driver
