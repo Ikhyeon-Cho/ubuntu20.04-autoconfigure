@@ -23,13 +23,15 @@ install_package ros-noetic-desktop-full
 SHELL_CONFIG_FILE="$HOME/.bashrc" # Default to .bashrc
 if which zsh &> /dev/null; then
     SHELL_CONFIG_FILE="$HOME/.zshrc"
+    grep -qxF 'source /opt/ros/noetic/setup.sh' "$SHELL_CONFIG_FILE" || echo "source /opt/ros/noetic/setup.zsh" >> "$SHELL_CONFIG_FILE"
+
 elif which bash &> /dev/null; then
    SHELL_CONFIG_FILE="$HOME/.bashrc"
+    grep -qxF 'source /opt/ros/noetic/setup.sh' "$SHELL_CONFIG_FILE" || echo "source /opt/ros/noetic/setup.bash" >> "$SHELL_CONFIG_FILE"
 else
    echo "Unknown shell. Please add 'source /opt/ros/noetic/setup.sh' manually to your shell's config file. Quitting."
    exit 1
 fi
-grep -qxF 'source /opt/ros/noetic/setup.sh' "$SHELL_CONFIG_FILE" || echo "source /opt/ros/noetic/setup.sh" >> "$SHELL_CONFIG_FILE"
 
 # Install rosdep dependencies
 install_package python3-rosdep
