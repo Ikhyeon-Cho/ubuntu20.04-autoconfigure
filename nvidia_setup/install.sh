@@ -47,5 +47,6 @@ echo -e "\033[1;32mNVIDIA driver has been installed.\033[0m\n"
 # Install gpu tools
 echo -e "\033[1;32mInstalling gpustat...\033[0m"
 install_package python3-pip
-pip install --user gpustat && echo && gpustat && echo
+# pip install --user gpustat && echo && gpustat && echo
+install_package gpustat
 echo -e "\033[1;32mgpustat has been installed.\033[0m\n"
