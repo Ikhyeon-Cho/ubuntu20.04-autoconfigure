@@ -12,7 +12,7 @@ is_docker_installed() {
     fi
 }
 
-# Check if Docker is installed, and install it if it's not
+# Check if Docker is installed, and if not, install it 
 if ! is_docker_installed; then
     echo -e "\033[1;32mInstalling Docker...\033[0m\n"
 
@@ -31,16 +31,15 @@ if ! is_docker_installed; then
     update_package_list
 
     # Install Docker
-    install_package docker-ce \
-    docker-ce-cli \
-    containerd.io \
-    docker-buildx-plugin \
-    docker-compose-plugin
+    install_package docker-ce
+    install_package docker-ce-cli
+    install_package containerd.io
+    install_package docker-buildx-plugin
+    install_package docker-compose-plugin
 
     # Post installation steps
     sudo groupadd docker 2> /dev/null  # Suppress the error if the group already exists
     sudo usermod -aG docker $USER
-    newgrp docker
 
     # Verify the installation without sudo
     docker run hello-world
@@ -82,3 +81,4 @@ else
   exit 1
 fi
 
+echo -e "\033[1;32mNeed to log out and log in again, to make docker command available without sudo...\033[0m\n"
