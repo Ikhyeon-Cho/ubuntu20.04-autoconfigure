@@ -1,25 +1,24 @@
 #!/bin/bash
-DOCKERFILE_NAME="pytorch.Dockerfile"
+DOCKERFILE_NAME="nvidia-cuda.Dockerfile"
 
-# Parameters
+#################################################################
+#### Usage: ./run.sh {container_name} (default: pytorch-dev) ####
+#################################################################
+
+# Base image settings: Use conda search -c pytorch to check valid versions
 UBUNTU_VERSION="20.04"
 PYTHON_VERSION="3.8"
-PYTORCH_VERSION="1.11.0"
-CUDA="11.3"
-CUDA_VERSION="11.3.1"
+PYTORCH_VERSION="1.12"
+CUDA_VERSION="11.3"
 CUDNN_VERSION="8"
 
 # Settings: image name, container name, volume connection and ports
-IMAGE_NAME="Ikhyeon-Cho/pytorch:$PYTORCH_VERSION-cu$CUDA-ubuntu$UBUNTU_VERSION"
-CONTAINER_NAME="${1:-dev-pytorch}"
-WORKSPACE_DIR="$HOME/workspace"
+IMAGE_NAME="Ikhyeon-Cho/pytorch:$PYTORCH_VERSION-cu$CUDA_VERSION-ubuntu$UBUNTU_VERSION"
+CONTAINER_NAME="${1:-pytorch-dev}"
+LOCAL_WORKSPACE_DIR="$HOME/workspace"
 HOST_PORT=8888
 CONTAINER_PORT=8888
 SHELL="/bin/zsh"
-
-# Check if USER and UID are set, otherwise set defaults
-USER_NAME="${USER:-defaultuser}"
-USER_UID="${UID:-1000}"
 
 # Exit immediately if a command exits with a non-zero status
 set -e
@@ -31,12 +30,9 @@ if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
   # Build the Docker image
   docker build -t $IMAGE_NAME \
     -f "$DOCKERFILE_NAME" . \
-    --build-arg UID="$USER_UID" \
-    --build-arg USER_NAME="$USER_NAME" \
     --build-arg UBUNTU_VERSION="$UBUNTU_VERSION" \
     --build-arg PYTHON_VERSION="$PYTHON_VERSION" \
     --build-arg PYTORCH_VERSION="$PYTORCH_VERSION" \
-    --build-arg CUDA="$CUDA" \
     --build-arg CUDA_VERSION="$CUDA_VERSION" \
     --build-arg CUDNN_VERSION="$CUDNN_VERSION"
 
@@ -53,9 +49,11 @@ else
 
   docker run -it --name "$CONTAINER_NAME" \
     --gpus all \
+    --shm-size=8G \
     -p "$HOST_PORT:$CONTAINER_PORT" \
-    -v "$PWD":"$WORKSPACE_DIR" \
-    -w "$WORKSPACE_DIR" \
+    -v "$LOCAL_WORKSPACE_DIR":"/workspace" \
+    -v "/media:/media" \
+    -w "/workspace" \
     "$IMAGE_NAME" \
     "$SHELL"
     
