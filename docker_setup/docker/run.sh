@@ -11,23 +11,29 @@ PYTHON_VERSION="3.8"
 PYTORCH_VERSION="1.12"
 CUDA_VERSION="11.3"
 CUDNN_VERSION="8"
-
-# Settings: image name, container name, volume connection and ports
 IMAGE_NAME="Ikhyeon-Cho/pytorch:$PYTORCH_VERSION-cu$CUDA_VERSION-ubuntu$UBUNTU_VERSION"
+
+# Container settings: Name, port connection and shell
 CONTAINER_NAME="${1:-pytorch-dev}"
-LOCAL_WORKSPACE_DIR="$HOME/workspace"
 HOST_PORT=8888
 CONTAINER_PORT=8888
 SHELL="/bin/zsh"
 
+# Volume settings:
+HOST_WORKSPACE_DIR="$HOME/workspace"
+HOST_DATA_DIR="/media/ikhyeon/T9_KITTI"
+
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Check existing Docker image
+if [ ! -d "$HOST_WORKSPACE_DIR" ]; then
+  echo "Host workspace directory does not exist. Creating $HOST_WORKSPACE_DIR..."
+  mkdir -p "$HOST_WORKSPACE_DIR"
+fi
+
+# Build the Docker image
 if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
   echo "Image $IMAGE_NAME not found. Building the image..."
-  
-  # Build the Docker image
   docker build -t $IMAGE_NAME \
     -f "$DOCKERFILE_NAME" . \
     --build-arg UBUNTU_VERSION="$UBUNTU_VERSION" \
@@ -51,8 +57,8 @@ else
     --gpus all \
     --shm-size=8G \
     -p "$HOST_PORT:$CONTAINER_PORT" \
-    -v "$LOCAL_WORKSPACE_DIR":"/workspace" \
-    -v "/media:/media" \
+    -v "$HOST_WORKSPACE_DIR":"/workspace" \
+    -v "$HOST_DATA_DIR":"/data" \
     -w "/workspace" \
     "$IMAGE_NAME" \
     "$SHELL"
