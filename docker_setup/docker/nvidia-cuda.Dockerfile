@@ -21,7 +21,10 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates ccache curl build-essential cmake ninja-build lsb-release gnupg2 sudo \
   python3-pip zsh git wget pkg-config software-properties-common ssh openssh-server unzip vim \
+  # For X11 forwarding
+  libx11-xcb1 libxcb-{icccm4,image0,keysyms1,randr0,render-util0,shape0,xfixes0,xinerama0,cursor0} libxkbcommon-x11-0 \
   # libopencv-dev \
+  python3-opencv \
   libopenblas-dev && \
   rm -rf /var/lib/apt/lists/*
 
@@ -45,14 +48,15 @@ RUN curl -o /root/miniconda.sh -sSL http://repo.continuum.io/miniconda/Miniconda
 ENV PATH /root/miniconda/bin:$PATH
 
 # Create Conda environment and install packages
-ARG CONDA_ENV_NAME=cuda-${CUDA_VERSION}
+ARG CONTAINER_NAME
+ARG CONDA_ENV_NAME=${CONTAINER_NAME:-cuda-${CUDA_VERSION}}
 RUN /root/miniconda/bin/conda update -y conda && \
   /root/miniconda/bin/conda create -n ${CONDA_ENV_NAME} python=${PYTHON_VERSION} && \
   /root/miniconda/bin/conda config --add channels defaults && \
   /root/miniconda/bin/conda install -n ${CONDA_ENV_NAME} -c conda-forge jupyterlab && \
   /root/miniconda/bin/conda install -n ${CONDA_ENV_NAME} pytorch=${PYTORCH_VERSION} torchvision torchaudio cudatoolkit=${CUDA_VERSION} -c pytorch
 
-# Install Oh My Zsh and zsh plugins
+# (Optional) Install Oh My Zsh and zsh plugins
 RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" --unattended && \
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
@@ -62,6 +66,7 @@ RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
   echo "conda activate ${CONDA_ENV_NAME}" >> /root/.zshrc && \
   # Check: print GPU info at execution
   echo "python -c \"import torch; \
-  print(f'\n# of GPUs: {torch.cuda.device_count()}'); \
+  print(f'# of GPUs: {torch.cuda.device_count()}'); \
   print(f'Device: {torch.cuda.get_device_name(0) if torch.cuda.device_count() > 0 else None}'); \
   print(f'CUDA availability in Pytorch: {torch.cuda.is_available()}\n')\"" >> /root/.zshrc
+CMD ["/bin/zsh"]
