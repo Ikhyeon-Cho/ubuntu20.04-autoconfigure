@@ -1,17 +1,19 @@
 ARG UBUNTU_VERSION=20.04
-ARG CUDA_VERSION=11.3
+ARG CUDA_VERSION=11.3.1
 ARG CUDNN_VERSION=8
 ARG PYTHON_VERSION=3.8
 ARG PYTORCH_VERSION=1.12
 
 # Configure base image: see https://hub.docker.com/r/nvidia/cuda/tags
-FROM nvidia/cuda:${CUDA_VERSION}.1-cudnn${CUDNN_VERSION}-devel-ubuntu${UBUNTU_VERSION}
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-devel-ubuntu${UBUNTU_VERSION}
 
 # Re-declare ARGs after FROM
 ARG CUDA_VERSION
 ARG PYTHON_VERSION
 ARG PYTORCH_VERSION
 
+# Remove the minor version number: 11.3.1 -> 11.3
+ENV CUDA_VERSION=${CUDA_VERSION%.*}
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG C.UTF-8
 
@@ -29,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   rm -rf /var/lib/apt/lists/*
 
 # CUDA profiling and library setup
-ENV LD_LIBRARY_PATH /usr/local/cuda-${CUDA_VERSION}/targets/x86_64-linux/lib:/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH /usr/local/cuda-$CUDA_VERSION/targets/x86_64-linux/lib:/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1 && \
   echo "/usr/local/cuda/lib64/stubs" > /etc/ld.so.conf.d/z-cuda-stubs.conf && \
   ldconfig
@@ -49,12 +51,12 @@ ENV PATH /root/miniconda/bin:$PATH
 
 # Create Conda environment and install packages
 ARG CONTAINER_NAME
-ARG CONDA_ENV_NAME=${CONTAINER_NAME:-cuda-${CUDA_VERSION}}
+ARG CONDA_ENV_NAME=${CONTAINER_NAME:-cuda-$CUDA_VERSION}
 RUN /root/miniconda/bin/conda update -y conda && \
   /root/miniconda/bin/conda create -n ${CONDA_ENV_NAME} python=${PYTHON_VERSION} && \
   /root/miniconda/bin/conda config --add channels defaults && \
   /root/miniconda/bin/conda install -n ${CONDA_ENV_NAME} -c conda-forge jupyterlab && \
-  /root/miniconda/bin/conda install -n ${CONDA_ENV_NAME} pytorch=${PYTORCH_VERSION} torchvision torchaudio cudatoolkit=${CUDA_VERSION} -c pytorch
+  /root/miniconda/bin/conda install -n ${CONDA_ENV_NAME} pytorch=${PYTORCH_VERSION} torchvision torchaudio cudatoolkit=$CUDA_VERSION -c pytorch -c nvidia
 
 # (Optional) Install Oh My Zsh and zsh plugins
 RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" --unattended && \
