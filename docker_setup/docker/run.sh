@@ -35,7 +35,7 @@ echo -e "\033[33mImage: $IMAGE_NAME\033[0m"
 echo -e "\033[33mContainer: $CONTAINER_NAME\033[0m"
 if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
   echo -e "\033[33mImage not found. Building the image...\033[0m"
-  docker build --progress=plain -t $IMAGE_NAME \
+  docker build -t $IMAGE_NAME \
     -f "$DOCKERFILE_NAME" . \
     --build-arg PYTORCH_VERSION="$PYTORCH_VERSION" \
     --build-arg CUDA_VERSION="$CUDA_VERSION" \
